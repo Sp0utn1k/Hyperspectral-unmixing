@@ -82,86 +82,86 @@ for k = 1:n
     pause(1e-2)
     saveas(gcf,'images/Pavia/k='+string(k)+'_unknown_U(red).png')
 
-    alphas = zeros(size(gt,1),size(gt,2),n);
+%     alphas = zeros(size(gt,1),size(gt,2),n);
 
-    Minv = (M'*M)\M';
-    threshold = .3;
+%     Minv = (M'*M)\M';
+%     threshold = .3;
 
-    for i = 1:size(alphas,1)
-        for j = 1:size(alphas,2)
-            r = reshape(data(i,j,:),[],1);
-            A = Minv*r;
+%     for i = 1:size(alphas,1)
+%         for j = 1:size(alphas,2)
+%             r = reshape(data(i,j,:),[],1);
+%             A = Minv*r;
 
-            A = max(0,min(1,A));
-    %         A = A/sum(A);
-            idx = A > threshold;
-    %         [~ ,idx] = max(A);
+%             A = max(0,min(1,A));
+%     %         A = A/sum(A);
+%             idx = A > threshold;
+%     %         [~ ,idx] = max(A);
 
-    %         A = zeros(size(A));
-    %         A(idx) = 1;
+%     %         A = zeros(size(A));
+%     %         A(idx) = 1;
 
-            alphas(i,j,:) = A;
-        end
-    end
+%             alphas(i,j,:) = A;
+%         end
+%     end
 
-    figure
-    alphas = alphas(:,:,k);
-    alphas = [alphas(:,1:gap_pos),zeros(size(alphas,1),gap),alphas(:,gap_pos+1:end)];
-    image(alphas,'CDataMapping','scaled')
-    colorbar
-    axis equal
-    axis([0 size(alphas,2) 0 size(alphas,1)])
-    axis off
-    pause(1e-2)
-    saveas(gcf,'images/Pavia/k='+string(k)+'_pseudo_inverse.png')
+%     figure
+%     alphas = alphas(:,:,k);
+%     alphas = [alphas(:,1:gap_pos),zeros(size(alphas,1),gap),alphas(:,gap_pos+1:end)];
+%     image(alphas,'CDataMapping','scaled')
+%     colorbar
+%     axis equal
+%     axis([0 size(alphas,2) 0 size(alphas,1)])
+%     axis off
+%     pause(1e-2)
+%     saveas(gcf,'images/Pavia/k='+string(k)+'_pseudo_inverse.png')
 
-    figure
-    hold on
-    image(flipud(alphas),'CDataMapping','scaled')
-    plot(X,Y,'r.')
-    axis equal
-    axis([0 size(alphas,2) 0 size(alphas,1)])
-    axis off
-    pause(1e-2)
-    saveas(gcf,'images/Pavia/k='+string(k)+'_pseudo_inverse(red).png')
+%     figure
+%     hold on
+%     image(flipud(alphas),'CDataMapping','scaled')
+%     plot(X,Y,'r.')
+%     axis equal
+%     axis([0 size(alphas,2) 0 size(alphas,1)])
+%     axis off
+%     pause(1e-2)
+%     saveas(gcf,'images/Pavia/k='+string(k)+'_pseudo_inverse(red).png')
 
 
-    alphas = zeros(size(gt));
-    d = M(:,k);
-    U = M;
-    U(:,k) = [];
+%     alphas = zeros(size(gt));
+%     d = M(:,k);
+%     U = M;
+%     U(:,k) = [];
 
-    Pu = ones(m) - U/(U'*U)*U';
+%     Pu = ones(m) - U/(U'*U)*U';
 
-    for i = 1:size(alphas,1)
-        for j = 1:size(alphas,2)
-            r = reshape(data(i,j,:),[],1);
-            A = d'*Pu*r/(d'*Pu*d);
-            alphas(i,j) = max(0,min(1,A));
-        end
-    end
+%     for i = 1:size(alphas,1)
+%         for j = 1:size(alphas,2)
+%             r = reshape(data(i,j,:),[],1);
+%             A = d'*Pu*r/(d'*Pu*d);
+%             alphas(i,j) = max(0,min(1,A));
+%         end
+%     end
 
-    figure
-    alphas = [alphas(:,1:gap_pos),zeros(size(alphas,1),gap),alphas(:,gap_pos+1:end)];
-    image(alphas,'CDataMapping','scaled')
-    colorbar
-    axis equal
-    axis([0 size(alphas,2) 0 size(alphas,1)])
-    axis off
-    pause(1e-2)
-    saveas(gcf,'images/Pavia/k='+string(k)+'_optimum_detection.png')
+%     figure
+%     alphas = [alphas(:,1:gap_pos),zeros(size(alphas,1),gap),alphas(:,gap_pos+1:end)];
+%     image(alphas,'CDataMapping','scaled')
+%     colorbar
+%     axis equal
+%     axis([0 size(alphas,2) 0 size(alphas,1)])
+%     axis off
+%     pause(1e-2)
+%     saveas(gcf,'images/Pavia/k='+string(k)+'_optimum_detection.png')
 
-    figure 
-    hold on
-    image(flipud(alphas),'CDataMapping','scaled')
-    plot(X,Y,'r.')
-    axis equal
-    axis([0 size(alphas,2) 0 size(alphas,1)])
-    axis off
-    pause(1e-2)
-    saveas(gcf,'images/Pavia/k='+string(k)+'_optimum_detection(red).png')
+%     figure 
+%     hold on
+%     image(flipud(alphas),'CDataMapping','scaled')
+%     plot(X,Y,'r.')
+%     axis equal
+%     axis([0 size(alphas,2) 0 size(alphas,1)])
+%     axis off
+%     pause(1e-2)
+%     saveas(gcf,'images/Pavia/k='+string(k)+'_optimum_detection(red).png')
     
-end
+% end
 
-pause(1)
-close all
+% pause(1)
+% close all
